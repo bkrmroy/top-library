@@ -1,0 +1,78 @@
+body{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+        min-height: 100vh;
+}
+.header{
+    grid-column: 1 / 2;
+
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+button{
+    all: unset;
+    background-color: rgb(91, 162, 255);
+    color: white;
+    padding: 8px 16px 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    height: fit-content;
+}
+button:hover{
+    scale: 1.05;
+}
+.header-text{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.content{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    background-color: antiquewhite;
+    padding:32px;
+    gap: 16px;
+}
+.info-container{
+    background-color: white;
+}
+.book{
+    padding: 12px;
+    border-radius: 16px;
+    background-color: white;
+    color: black;
+    height: fit-content;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow: 7px 10px 8px 0px rgba(0,0,0,0.24); 
+    box-shadow: 7px 10px 8px 0px rgba(0,0,0,0.24);
+}
+.book:hover{
+    scale: 1.02;
+}
+.book-title{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.book-container{
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, 250px);
+}
+.info-container{
+    padding: 16px;
+    border-radius: 16px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: fit-content;
+}
