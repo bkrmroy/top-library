@@ -15,13 +15,15 @@
     <div class="header">
         <span class="header-text">My Library</span>
         <div class="header-buttons">
-            <button class="add-book">Add Book</button>
             <button class="sign-in">Sign in</button>
         </div>
         
     </div>
     <div class="content">
         <div class="book-container">
+            <div class="book add-book">
+                <button class="btn-add-book">&plus;</button>
+            </div>
             <!-- <div class="book">
                 <div class="book-title">Book 1</div>
                 <div class="book-author">Author: </div>
@@ -40,5 +42,29 @@
             <div>Total book read</div>
         </div>
     </div>
+    <div class="form">
+        <div class="form-header">
+            <div class="form-title">Add Book</div>
+            <button class="form-close">&times;</button>
+        </div>
+        <div class="form-body">
+            <form class="main-form" action="#" method="post">
+                <div>
+                    <label for="new-book-title">Title</label>
+                    <input required type="text" id="new-book-title" name="new-book-title">
+                </div>
+                <div>
+                    <label for="new-book-author">Author</label>
+                    <input required type="text" id="new-book-author" name="new-book-author">
+                </div>
+                <div>
+                    <label for="new-book-pages">Pages</label>
+                    <input required type="number" id="new-book-pages" name="new-book-pages">
+                </div>
+                <button type="submit" class="btn-form-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="overlay"></div>
 </body>
 </html>

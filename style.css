@@ -1,10 +1,14 @@
+:root{
+    --primary-color: #bfdbfe;
+    --secondary-color: #3b82f6;
+}
 body{
     display: grid;
     grid-template-rows: auto 1fr;
     font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
-        min-height: 100vh;
+    min-height: 100vh;
 }
 .header{
     grid-column: 1 / 2;
@@ -17,7 +21,7 @@ body{
 }
 button{
     all: unset;
-    background-color: rgb(91, 162, 255);
+    background-color: #3b82f6;
     color: white;
     padding: 8px 16px 8px 16px;
     border-radius: 8px;
@@ -25,17 +29,27 @@ button{
     cursor: pointer;
     height: fit-content;
 }
+.btn-add-book{
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+
+    text-align: center;
+    color: #3b82f6;
+}
 button:hover{
     scale: 1.05;
 }
 .header-text{
     font-size: 2rem;
     font-weight: bold;
+    color: var(--secondary-color);
 }
 .content{
     display: grid;
     grid-template-columns: 1fr 200px;
-    background-color: antiquewhite;
+    background-color: #bfdbfe;
     padding:32px;
     gap: 16px;
 }
@@ -56,18 +70,27 @@ button:hover{
     box-shadow: 7px 10px 8px 0px rgba(0,0,0,0.24);
     min-height: 150px;
 }
+.book.add-book{
+    justify-content: center;
+    font-size: 4rem;
+
+}
 .book:hover{
     scale: 1.02;
 }
 .book-title{
-    font-weight: bold;
+    font-style: italic;
     font-size: 1.2rem;
+    text-align: center;
+}
+.book-author{
     text-align: center;
 }
 .book-container{
     display: grid;
     gap: 16px;
     grid-template-columns: repeat(auto-fit, 250px);
+    
 }
 .info-container{
     padding: 16px;
@@ -78,3 +101,73 @@ button:hover{
     gap: 8px;
     height: fit-content;
 }
+
+.form{
+    border-radius: 16px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 10;
+    background-color: white;
+    width: clamp(30%, 400px, 80%);
+}
+.form.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+.form-header{
+    display: flex;
+    padding: 8px 16px;
+    justify-content: space-between;
+
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+}
+
+.form-body{
+    padding: 0px 16px 8px 16px;
+}
+.form-close{
+    outline: none;
+    border: none;
+    background: none;
+    color: black;
+}
+.form input{
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid  var(--secondary-color);
+    outline: none;
+}
+.main-form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.btn-form-submit{
+    text-align: center;
+    margin-top: 16px;
+}
+.form-body div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.overlay{
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }

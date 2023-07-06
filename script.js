@@ -1,5 +1,7 @@
 const bookContainer = document.querySelector(".book-container")
-
+const btnAddBook = document.querySelector(".book.add-book")
+const btnFormClose = document.querySelector(".form-close")
+const overlay =document.querySelector(".overlay")
 let myLibrary = [];
 
 function Book(title, author , pages, readStaus) {
@@ -8,14 +10,16 @@ function Book(title, author , pages, readStaus) {
   this.pages = pages;
   this.readStaus = readStaus;
 }
-const book1= new Book('The Art of Thinking Clearly','Rolf Dobelli','55', 'read')
-const book2= new Book('Y','a','51', 'not read yet')
-const book3= new Book('asdf','zxcv',414, 'asdf')
+const book1= new Book('The Art of Thinking Clearly','Rolf Dobelli','384', 'Read')
+const book2= new Book('The Subtle Art of Not Giving a F*ck','Mark Manson','212', 'Not read yet')
+const book3= new Book('Ikigai','Francesc Miralles and Hector Garcia','208', 'Read')
+
 
 function addBookToLibrary() {
   myLibrary.push(book1)
   myLibrary.push(book2)
   myLibrary.push(book3)
+
 }
 addBookToLibrary()
 
@@ -30,12 +34,12 @@ myLibrary.forEach(item => {
 
     const bookAuthor = document.createElement("div")
     bookAuthor.classList.add("book-author")
-    bookAuthor.textContent = `Author : ${item.author}`
+    bookAuthor.textContent = `${item.author}`
     book.appendChild(bookAuthor)
 
     const bookPages = document.createElement("div")
     bookPages.classList.add("book-pages")
-    bookPages.textContent = `Pages : ${item.pages}`
+    bookPages.textContent = `${item.pages} pages`
     book.appendChild(bookPages)
 
     const readStaus = document.createElement("div")
@@ -43,7 +47,32 @@ myLibrary.forEach(item => {
     readStaus.textContent = `Status: ${item.readStaus}`
     book.appendChild(readStaus)
 
-    bookContainer.appendChild(book);
+    // bookContainer.appendChild(book);
+    // bookContainer.insertBefore(book, bookContainer.firstChild.nextSibling);
+    btnAddBook.insertAdjacentElement('afterend', book)
 })
 
 
+//popup form
+btnAddBook.addEventListener("click", ()=>{
+  const form = document.querySelector(".form")
+  openForm(form);
+})
+btnFormClose.addEventListener("click",()=>{
+  const form = document.querySelector(".form")
+  closeForm(form);
+})
+overlay.addEventListener("click",()=>{
+  const form = document.querySelector(".form.active")
+  closeForm(form);
+})
+function openForm(form){
+  if(form == null) return
+  form.classList.add("active")
+  overlay.classList.add("active")
+}
+function closeForm(form){
+  if(form == null) return
+  form.classList.remove("active")
+  overlay.classList.remove("active")
+}
