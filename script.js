@@ -1,29 +1,43 @@
 const bookContainer = document.querySelector(".book-container")
 const btnAddBook = document.querySelector(".book.add-book")
 const btnFormClose = document.querySelector(".form-close")
-const overlay =document.querySelector(".overlay")
+const overlay = document.querySelector(".overlay")
+const btnFormSubmit = document.querySelector(".btn-form-submit");
+
 let myLibrary = [];
 
-function Book(title, author , pages, readStaus) {
+function Book(title, author , pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.readStaus = readStaus;
+  // this.readStaus = readStaus;
 }
-const book1= new Book('The Art of Thinking Clearly','Rolf Dobelli','384', 'Read')
-const book2= new Book('The Subtle Art of Not Giving a F*ck','Mark Manson','212', 'Not read yet')
-const book3= new Book('Ikigai','Francesc Miralles and Hector Garcia','208', 'Read')
 
+function addBookToLibrary(event) {
+  event.preventDefault()
+  const title = document.getElementById("new-book-title").value;
+  const author = document.getElementById("new-book-author").value;
+  const pages = document.getElementById("new-book-pages").value;
 
-function addBookToLibrary() {
-  myLibrary.push(book1)
-  myLibrary.push(book2)
-  myLibrary.push(book3)
+  if(title === '' || author === '' || pages === '') return;
+  else{
+    const book = new Book(title, author, pages)
+    myLibrary.push(book)
+    loopThroughLibrary()
 
+    const form = document.querySelector(".form.active")
+    closeForm(form);
+  }
 }
-addBookToLibrary()
+btnFormSubmit.addEventListener("click",()=>{
+  const form = document.querySelector(".main-form")
+  form.checkValidity();
+  form.reportValidity();
+})
+btnFormSubmit.addEventListener("click",addBookToLibrary)
 
-myLibrary.forEach(item => {
+function loopThroughLibrary(){
+  myLibrary.forEach(item => {
     const book = document.createElement("div")
     book.classList.add("book")
 
@@ -42,16 +56,18 @@ myLibrary.forEach(item => {
     bookPages.textContent = `${item.pages} pages`
     book.appendChild(bookPages)
 
-    const readStaus = document.createElement("div")
-    readStaus.classList.add("book-read-status")
-    readStaus.textContent = `Status: ${item.readStaus}`
-    book.appendChild(readStaus)
+    // const readStaus = document.createElement("div")
+    // readStaus.classList.add("book-read-status")
+    // readStaus.textContent = `Status: ${item.readStaus}`
+    // book.appendChild(readStaus)
 
     // bookContainer.appendChild(book);
     // bookContainer.insertBefore(book, bookContainer.firstChild.nextSibling);
+
+    if(item.title === document.querySelector(".book-title").textContent) return
     btnAddBook.insertAdjacentElement('afterend', book)
 })
-
+}
 
 //popup form
 btnAddBook.addEventListener("click", ()=>{
@@ -75,4 +91,5 @@ function closeForm(form){
   if(form == null) return
   form.classList.remove("active")
   overlay.classList.remove("active")
+  document.querySelector(".main-form").reset()
 }
