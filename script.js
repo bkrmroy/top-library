@@ -3,7 +3,7 @@ const btnAddBook = document.querySelector(".book.add-book")
 const btnFormClose = document.querySelector(".form-close")
 const overlay = document.querySelector(".overlay")
 const btnFormSubmit = document.querySelector(".btn-form-submit");
-
+const form = document.querySelector(".main-form")
 let myLibrary = [];
 
 function Book(title, author , pages) {
@@ -29,8 +29,8 @@ function addBookToLibrary(event) {
     closeForm(form);
   }
 }
+
 btnFormSubmit.addEventListener("click",()=>{
-  const form = document.querySelector(".main-form")
   form.checkValidity();
   form.reportValidity();
 })
@@ -64,7 +64,24 @@ function loopThroughLibrary(){
     // bookContainer.appendChild(book);
     // bookContainer.insertBefore(book, bookContainer.firstChild.nextSibling);
 
-    if(item.title === document.querySelector(".book-title").textContent) return
+    const removeBook = document.createElement("button")
+    removeBook.classList.add("remove-book")
+    removeBook.textContent = 'Remove'
+    book.appendChild(removeBook)
+    
+    const domBooklist = document.querySelectorAll(".book")
+
+    let bookExists= false;
+    domBooklist.forEach(book => {
+      if(book.childNodes[0].textContent === item.title &&
+         book.childNodes[1].textContent === item.author &&
+         book.childNodes[2].textContent === `${item.pages} pages` ){
+          
+        return bookExists = true;
+      }
+    })
+    // console.log(typeof(booklist))
+    if(bookExists === true) return 
     btnAddBook.insertAdjacentElement('afterend', book)
 })
 }
