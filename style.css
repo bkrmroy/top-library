@@ -56,7 +56,7 @@ button:hover{
 .info-container{
     background-color: white;
 }
-.book{
+.book, .add-book{
     padding: 16px;
     border-radius: 16px;
     background-color: white;
@@ -73,7 +73,6 @@ button:hover{
 .add-book{
     justify-content: center;
     font-size: 4rem;
-
 }
 .book:hover{
     scale: 1.02;

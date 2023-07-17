@@ -1,5 +1,5 @@
 const bookContainer = document.querySelector(".book-container")
-const btnAddBook = document.querySelector(".book.add-book")
+const btnAddBook = document.querySelector(".add-book")
 const btnFormClose = document.querySelector(".form-close")
 const overlay = document.querySelector(".overlay")
 const btnFormSubmit = document.querySelector(".btn-form-submit");
@@ -20,9 +20,21 @@ function addBookToLibrary(event) {
   const pages = document.getElementById("new-book-pages").value;
 
   if(title === '' || author === '' || pages === '') return;
+
+  let bookExistsInArray = false;
+  myLibrary.forEach(item =>{
+    if(title === item.title &&
+      author === item.author &&
+      pages === item.pages.replace(/[A-Za-z$-]/g, "")){
+        bookExistsInArray = true;
+        alert("Book already exists in libray")
+      }
+  })
+  if(bookExistsInArray === true) return
   else{
     const book = new Book(title, author, pages)
     myLibrary.push(book)
+    console.log(myLibrary)
     loopThroughLibrary()
 
     const form = document.querySelector(".form.active")
@@ -38,6 +50,20 @@ btnFormSubmit.addEventListener("click",addBookToLibrary)
 
 function loopThroughLibrary(){
   myLibrary.forEach(item => {
+    const domBooklist = document.querySelectorAll(".book")
+
+    let bookExists= false;
+    domBooklist.forEach(book => {
+      if(book.childNodes[0].textContent === item.title &&
+         book.childNodes[1].textContent === item.author &&
+         book.childNodes[2].textContent === `${item.pages} pages` ){
+          
+        return bookExists = true;
+      }
+    })
+    // console.log(typeof(booklist))
+    if(bookExists === true) return 
+
     const book = document.createElement("div")
     book.classList.add("book")
 
@@ -69,19 +95,7 @@ function loopThroughLibrary(){
     removeBook.textContent = 'Remove'
     book.appendChild(removeBook)
     
-    const domBooklist = document.querySelectorAll(".book")
 
-    let bookExists= false;
-    domBooklist.forEach(book => {
-      if(book.childNodes[0].textContent === item.title &&
-         book.childNodes[1].textContent === item.author &&
-         book.childNodes[2].textContent === `${item.pages} pages` ){
-          
-        return bookExists = true;
-      }
-    })
-    // console.log(typeof(booklist))
-    if(bookExists === true) return 
     btnAddBook.insertAdjacentElement('afterend', book)
 })
 }
