@@ -34,8 +34,8 @@ function addBookToLibrary(event) {
   else{
     const book = new Book(title, author, pages)
     myLibrary.push(book)
-    console.log(myLibrary)
     loopThroughLibrary()
+    console.log(myLibrary)
 
     const form = document.querySelector(".form.active")
     closeForm(form);
@@ -47,6 +47,8 @@ btnFormSubmit.addEventListener("click",()=>{
   form.reportValidity();
 })
 btnFormSubmit.addEventListener("click",addBookToLibrary)
+
+
 
 function loopThroughLibrary(){
   myLibrary.forEach(item => {
@@ -61,11 +63,12 @@ function loopThroughLibrary(){
         return bookExists = true;
       }
     })
-    // console.log(typeof(booklist))
     if(bookExists === true) return 
 
     const book = document.createElement("div")
     book.classList.add("book")
+    
+    // book.dataset.number = myLibrary.indexOf(item)
 
     const bookTitle = document.createElement("div")
     bookTitle.classList.add("book-title")
@@ -81,6 +84,7 @@ function loopThroughLibrary(){
     bookPages.classList.add("book-pages")
     bookPages.textContent = `${item.pages} pages`
     book.appendChild(bookPages)
+
 
     // const readStaus = document.createElement("div")
     // readStaus.classList.add("book-read-status")
@@ -99,6 +103,16 @@ function loopThroughLibrary(){
     btnAddBook.insertAdjacentElement('afterend', book)
 })
 }
+
+//remove book
+bookContainer.addEventListener('click',function(event){
+  if(event.target.classList.contains('remove-book')){
+    event.target.parentElement.remove()
+    myLibrary.splice(myLibrary.indexOf(event.target.parentElement), 1)
+    console.log(myLibrary)
+  }
+})
+
 
 //popup form
 btnAddBook.addEventListener("click", ()=>{
