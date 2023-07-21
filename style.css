@@ -29,6 +29,13 @@ button{
     cursor: pointer;
     height: fit-content;
 }
+.change-read-status{
+    background-color: white;
+    border: none;
+    padding: 0;
+    color: #3b82f6;
+    text-decoration: underline;
+}
 .btn-add-book{
     cursor: pointer;
     border: none;
